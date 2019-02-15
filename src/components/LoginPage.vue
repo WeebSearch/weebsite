@@ -1,23 +1,52 @@
 <template>
   <div class="base">
-    <div class="login">
-      <div class="box">
-        <b-field class="login-label" label="Name">
-          <b-input v-model="name"></b-input>
-        </b-field>
-        <b-field class="login-label" label="Password">
-          <b-input v-model="password"></b-input>
-        </b-field>
-        <button class="button is-primary is-fullwidth"
-        :disabled="!canLogin()">
-          Login
-        </button>
-        <!--<br>-->
-        <!--<b-field label="Login with" class="login-with">-->
-          <!--<button class="button is-fullwidth is-info">Google</button>-->
-          <!--<button class="button is-fullwidth is-outlined">Github</button>-->
-          <!--<button class="button is-fullwidth"></button>-->
-        <!--</b-field>-->
+    <div class="columns wrapper">
+      <div class="column info is-two-thirds content">
+        <div class="box is-radiusless">
+        <p class="is-size-4">
+          Weebsearch is a service for tracking dialogues of anime characters and episodes.
+        </p>
+        <ul>
+          <li>Search episode transcripts</li>
+          <li>Look up character statistics</li>
+          <li>List your favorite character's dialogues</li>
+        </ul>
+          </div>
+      </div>
+      <div class="column login is-one-third">
+        <div class="box is-radiusless">
+          <h2 class="login-title is-size-3">Sign in</h2>
+          <b-field class="login-label" label="Email">
+            <b-input placeholder="hifumi@eaglejump.com" v-model="name"></b-input>
+          </b-field>
+          <b-field class="login-label" label="Password">
+            <b-input type="password" placeholder="••••••••" v-model="password"></b-input>
+          </b-field>
+          <div class="level is-mobile">
+            <div class="level-left">
+              <div class="level-item">
+                <b-checkbox v-model="checkbox" size="is-small">Remember me</b-checkbox>
+              </div>
+            </div>
+            <div class="level-right">
+              <div class="level-item">
+                <router-link to="/passwordreset" class="is-size-7">Forgot my password</router-link>
+              </div>
+            </div>
+          </div>
+          <button class="login-button button is-primary is-fullwidth"
+                  :disabled="!canLogin()">
+            Sign in
+          </button>
+        </div>
+        <div class="box is-radiusless">
+          <b-field label="Sign in with">
+            <button class="button is-fullwidth is-info">
+              <b-icon icon-pack="fab" icon="fa-google"></b-icon>
+              Google
+            </button>
+          </b-field>
+        </div>
       </div>
     </div>
   </div>
@@ -29,10 +58,11 @@
   import BLoading from "buefy/src/components/loading/Loading";
   import google from "@/assets/google.png";
   import BIcon from "buefy/src/components/icon/Icon";
+  import BCheckbox from "buefy/src/components/checkbox/Checkbox";
 
   export default {
     name: "Login",
-    components: { BIcon, BLoading, BInput },
+    components: { BCheckbox, BIcon, BLoading, BInput },
     data: () => ({
       name: "",
       password: "",
@@ -50,8 +80,7 @@
 <style scoped lang="scss">
   @import "../variables.scss";
 
-  label {
-    color: $foreground-color !important;
+  .login-button {
   }
 
   .login-with {
@@ -61,15 +90,8 @@
     grid-template-rows: 1fr 1fr 1fr;
   }
 
-  .login {
-    max-width: 400px;
-    max-height: 400px;
-    z-index: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100%;
+  .info {
+    /*margin-right: 1rem;*/
   }
 
   .base {
@@ -82,25 +104,29 @@
     width: 100%;
   }
 
-  .overlay {
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, .75) 100%);
-    min-width: 0;
-    position: absolute;
-    left: 0;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    height: 100%;
-    width: 100%;
+  .login-title {
+    text-align: center;
   }
 
-  .cover-background {
-    position: absolute;
-    height: 100vh;
-    width: 100vw;
-    background-image: url("~@/assets/weebsearch_login.jpg");
-    background-repeat: no-repeat;
-    background-position: 80% 20%;
-    background-size: cover;
-  }
+  // .overlay {
+  //   background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, .75) 100%);
+  //   min-width: 0;
+  //   position: absolute;
+  //   left: 0;
+  //   top: 0;
+  //   right: 0;
+  //   bottom: 0;
+  //   height: 100%;
+  //   width: 100%;
+  // }
+
+  // .cover-background {
+  //   position: absolute;
+  //   height: 100vh;
+  //   width: 100vw;
+  //   background-image: url("~@/assets/weebsearch_login.jpg");
+  //   background-repeat: no-repeat;
+  //   background-position: 80% 20%;
+  //   background-size: cover;
+  // }
 </style>

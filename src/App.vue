@@ -1,7 +1,9 @@
 <template>
   <div id="app">
     <Navbar/>
-    <router-view></router-view>
+    <div class="view">
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 
@@ -21,9 +23,13 @@
   @import "variables";
   @import url('https://fonts.googleapis.com/css?family=Overpass');
 
+  .view {
+    height: calc(100% - 52px) !important;
+    padding: 1rem;
+  }
   body {
     min-height: 100vh;
-    background-color: $background-darker;
+    background-color: $background-color;
   }
 
   * {

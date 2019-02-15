@@ -27,13 +27,13 @@
                   to="/login"
                   class="button is-outlined"
                 >
-                  Login
+                  Sign in
                 </router-link>
                 <router-link
                   to="/signup"
                   class="button is-primary "
                 >
-                  Sign up
+                  Register
                 </router-link>
               </div>
             </div>
@@ -60,12 +60,12 @@
   @import "../variables";
 
   .navbar {
-    background-color: $background-dark !important;
+    background-color: $background-color-alt !important;
     width: 65%;
   }
 
   .nav-section {
-    background-color: $background-dark !important;
+    background-color: $background-color-alt !important;
     width: 100vw;
     display: flex;
     justify-content: center;
@@ -74,7 +74,7 @@
   a {
     color: $text-color;
     &:hover {
-      color: white;
+      color: #000000;
     }
   }
 
