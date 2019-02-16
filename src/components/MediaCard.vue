@@ -1,13 +1,116 @@
 <template>
-
+  <div class="media-card box is-radiusless">
+    <div class="card-base" v-if="!loaded">
+      <div class="placeholder-image-container">
+        <div class="placeholder-image"></div>
+        <b-loading is-full-page="false"></b-loading>
+        <div class="placeholder-tags">
+          <div class="placeholder-tag"></div>
+          <div class="placeholder-tag"></div>
+          <div class="placeholder-tag"></div>
+        </div>
+      </div>
+      <div class="placeholder-text-container">
+        <div class="placeholder-text"></div>
+        <div class="placeholder-text"></div>
+      </div>
+    </div>
+    <!--<img @load="onLoad" :src="img" alt="">-->
+  </div>
 </template>
 
 <script>
-	export default {
-		name: "MediaCard"
-	}
+  import BLoading from "buefy/src/components/loading/Loading";
+  export default {
+    name: "MediaCard",
+    components: { BLoading },
+    props: {
+      img: String
+    },
+    data: () => ({
+      loaded: false
+    }),
+    methods: {
+      onLoad() {
+        this.loaded = true;
+      }
+    }
+  }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+  @import "../variables";
 
+  .media-card {
+    display: inline-flex;
+  }
+
+  .card-base {
+    width: 100%;
+    display: grid;
+    grid-template-rows: 4fr 1fr;
+    position: relative;
+  }
+
+  .placeholder-tags {
+    position: absolute;
+    margin: 10px;
+    height: 50%;
+    width: 32px;
+    grid-gap: .5rem;
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    top: 0;
+    left: 0;
+  }
+
+  .placeholder-tag {
+    position: relative;
+    background-color: $placeholder-alt;
+  }
+
+  .placeholder-text-container {
+    padding: 1rem;
+    display: grid;
+    grid-gap: .5rem;
+  }
+
+  .placeholder-text {
+    background-color: $placeholder;
+    &:last-child {
+      width: 80%;
+    }
+  }
+
+  .placeholder-image-container {
+    position: relative;
+    width: 100%;
+  }
+
+  .placeholder-image {
+    height: 100%;
+    padding: 20px;
+    background: $placeholder;
+  }
+
+  @-webkit-keyframes gradient-slide {
+    0%{background-position:0% 56%}
+    50%{background-position:100% 45%}
+    100%{background-position:0% 56%}
+  }
+  @-moz-keyframes gradient-slide {
+    0%{background-position:0% 56%}
+    50%{background-position:100% 45%}
+    100%{background-position:0% 56%}
+  }
+  @-o-keyframes gradient-slide {
+    0%{background-position:0% 56%}
+    50%{background-position:100% 45%}
+    100%{background-position:0% 56%}
+  }
+  @keyframes gradient-slide {
+    0%{background-position:0% 56%}
+    50%{background-position:100% 45%}
+    100%{background-position:0% 56%}
+  }
 </style>

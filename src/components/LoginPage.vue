@@ -55,14 +55,13 @@
 <script>
   import wallpaper from "@/assets/weebsearch_login.jpg";
   import BInput from "buefy/src/components/input/Input";
-  import BLoading from "buefy/src/components/loading/Loading";
   import google from "@/assets/google.png";
   import BIcon from "buefy/src/components/icon/Icon";
   import BCheckbox from "buefy/src/components/checkbox/Checkbox";
 
   export default {
     name: "Login",
-    components: { BCheckbox, BIcon, BLoading, BInput },
+    components: { BCheckbox, BIcon, BInput },
     data: () => ({
       name: "",
       password: "",
@@ -107,26 +106,4 @@
   .login-title {
     text-align: center;
   }
-
-  // .overlay {
-  //   background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, .75) 100%);
-  //   min-width: 0;
-  //   position: absolute;
-  //   left: 0;
-  //   top: 0;
-  //   right: 0;
-  //   bottom: 0;
-  //   height: 100%;
-  //   width: 100%;
-  // }
-
-  // .cover-background {
-  //   position: absolute;
-  //   height: 100vh;
-  //   width: 100vw;
-  //   background-image: url("~@/assets/weebsearch_login.jpg");
-  //   background-repeat: no-repeat;
-  //   background-position: 80% 20%;
-  //   background-size: cover;
-  // }
 </style>

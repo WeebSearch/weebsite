@@ -1,12 +1,12 @@
 <template>
-  <div>
-
-  </div>
+  <HomePage/>
 </template>
 
 <script>
+  import HomePage from "@/components/HomePage";
 	export default {
-		name: "Home"
+		name: "Home",
+    components: { HomePage }
 	}
 </script>
 

@@ -19,15 +19,26 @@
 </script>
 
 <style lang="scss">
+
+  .narrow-content {
+    width: 65%;
+  }
+
+  .padded-top {
+    padding-top: 1rem;
+  }
+
   @import "~bulma/sass/utilities/all";
   @import "variables";
   @import url('https://fonts.googleapis.com/css?family=Overpass');
 
   .view {
     height: calc(100% - 52px) !important;
+    display: flex;
+    justify-content: center;
     padding: 1rem;
   }
-  body {
+  body, body {
     min-height: 100vh;
     background-color: $background-color;
   }
