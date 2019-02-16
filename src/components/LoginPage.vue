@@ -41,8 +41,8 @@
         </div>
         <div class="box is-radiusless">
           <b-field label="Sign in with">
-            <button class="button is-fullwidth is-info">
-              <b-icon icon-pack="fab" icon="fa-google"></b-icon>
+            <button class="button is-fullwidth">
+              <b-icon icon-pack="fa" icon="fa-google"></b-icon>
               Google
             </button>
           </b-field>
