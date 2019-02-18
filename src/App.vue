@@ -1,29 +1,25 @@
 <template>
   <div class="wrapper">
-    <div id="app" v-if="authChecked">
+    <div id="app">
       <Navbar/>
       <div class="view">
         <router-view></router-view>
       </div>
     </div>
     <transition name="fade">
-      <Loader v-if="!authChecked"/>
+      <div class="cover" v-if="!authChecked">
+        <Loader/>
+      </div>
     </transition>
   </div>
 </template>
 
 <script>
   import Navbar from "@/components/Navbar";
-  // import BLoading from "buefy/src/components/loading/Loading";
   import Loader from "@/components/Loader";
 
   export default {
     name: 'app',
-    data() {
-      return {
-        loader
-      }
-    },
     computed: {
       authChecked() {
         return this.$store.state.authChecked;
@@ -37,6 +33,19 @@
 </script>
 
 <style lang="scss">
+  @import "~bulma/sass/utilities/all";
+  @import "variables";
+  @import url('https://fonts.googleapis.com/css?family=Overpass');
+
+  .cover {
+    background-color: $background-color;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    z-index: 100;
+  }
 
   .narrow-content {
     width: 65%;
@@ -45,10 +54,6 @@
   .padded-top {
     padding-top: 1rem;
   }
-
-  @import "~bulma/sass/utilities/all";
-  @import "variables";
-  @import url('https://fonts.googleapis.com/css?family=Overpass');
 
   .view {
     height: calc(100% - 52px) !important;

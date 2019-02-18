@@ -35,4 +35,4 @@ const routes = [{
   component: Animes
 }];
 
-export default new VueRouter({ routes });
+export default new VueRouter({ routes, mode: "history" });

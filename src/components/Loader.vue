@@ -19,6 +19,10 @@
 
 <style scoped>
   .wrapper {
+    opacity: 100%;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
     display: flex;
     position: absolute;
     top: 0;

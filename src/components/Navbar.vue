@@ -12,15 +12,14 @@
             class="navbar-burger burger"
             aria-label="menu"
             aria-expanded="false"
-            @click="toggleMenu"
           >
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
+            <span aria-hidden="true" @click="toggleMenu"></span>
+            <span aria-hidden="true" @click="toggleMenu"></span>
+            <span aria-hidden="true" @click="toggleMenu"></span>
           </a>
         </div>
-        <div class="navbar-menu">
-          <div class="navbar-start" :class="{ 'is-active': menuOpen }">
+        <div class="navbar-menu" :class="{ 'is-active': menuOpen }">
+          <div class="navbar-start">
             <div class="navbar-item" :key="link" v-for="link in links">
               <router-link :key="link" :to=link.toLowerCase()>
                 {{ link }}
@@ -44,8 +43,16 @@
                 </router-link>
               </div>
             </div>
-            <div class="navbar-item" v-if="isLoggedIn">
-              <button to="/" class="button is-outlined" @click="logout">Logout</button>
+            <div class="navbar-item has-dropdown" :class="{ 'is-active': settingsOpen }"  v-if="isLoggedIn">
+              <div class="navbar-link" @click="toggleSettings"></div>
+              <div class="navbar-dropdown">
+                <router-link tag="a" class="navbar-item">
+                  <h1>Settings</h1>
+                </router-link>
+                <div class="navbar-item">
+                  <button class="button is-outlined" @click="logout">Logout</button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -56,6 +63,7 @@
 
 <script>
   import image from "@/assets/weebsearch.png";
+
   const hiddenPaths = ["/signin", "/register"];
 
   // const handleLoginVisibility = (state) =>
@@ -65,6 +73,7 @@
   export default {
     data: () => ({
       menuOpen: false,
+      settingsOpen: false,
       links: ["Home", "Animes", "Profile"],
       image,
     }),
@@ -72,9 +81,12 @@
       toggleMenu() {
         return this.menuOpen = !this.menuOpen;
       },
-      logout() {
-        console.log('ye');
-        return this.$store.dispatch('logout');
+      toggleSettings() {
+        return this.settingsOpen = !this.settingsOpen;
+      },
+      async logout() {
+        await this.$store.dispatch('logout');
+        this.$router.push("/");
       }
     },
     computed: {
@@ -98,7 +110,10 @@
 
   .navbar {
     background-color: $background-color-alt !important;
-    width: 65%;
+    width: 100%;
+    @media(min-width: $tablet) {
+      width: 65%;
+    }
   }
 
   .nav-section {

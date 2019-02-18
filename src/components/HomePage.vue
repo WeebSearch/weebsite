@@ -2,7 +2,6 @@
   <ResponsiveRows>
     <div class="column">
       <div class="content">
-        <h1 class="is-size-1 has-text-centered">Weebsearch</h1>
         <SearchBar :placeholders="placeholders"/>
       </div>
       <div class="previews">
