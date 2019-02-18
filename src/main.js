@@ -1,7 +1,7 @@
 import Vue from 'vue';
+import Buefy from "buefy";
 import App from './App.vue';
 import router from "./router";
-import Buefy from "buefy";
 import store from './store';
 
 Vue.config.productionTip = false;

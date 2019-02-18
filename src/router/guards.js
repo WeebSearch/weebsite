@@ -1,11 +1,11 @@
 import store from "@/store";
 import { Snackbar } from "buefy/dist/components/snackbar";
 
-const isLoggedIn = () => Boolean(store.state.user);
+const isLoggedIn = () => store.dispatch('isUserAuthed');
 
 export const withAuth = {
-  beforeEnter: (to, from, next) => {
-    if (!isLoggedIn()) {
+  beforeEnter: async (to, from, next) => {
+    if (!await isLoggedIn()) {
       Snackbar.open({
         message: "You must sign in first.",
         type: "is-danger",
@@ -19,8 +19,8 @@ export const withAuth = {
 };
 
 export const withAnonymous = {
-  beforeEnter: (to, from, next) => {
-    if (isLoggedIn()) {
+  beforeEnter: async (to, from, next) => {
+    if (await isLoggedIn()) {
       Snackbar.open({
         message: "You're already signed in.",
         type: "is-primary",

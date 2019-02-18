@@ -1,24 +1,37 @@
 <template>
-  <div id="app">
-    <Navbar/>
-    <div class="view">
-      <router-view></router-view>
+  <div class="wrapper">
+    <div id="app" v-if="authChecked">
+      <Navbar/>
+      <div class="view">
+        <router-view></router-view>
+      </div>
     </div>
+    <transition name="fade">
+      <Loader v-if="!authChecked"/>
+    </transition>
   </div>
 </template>
 
 <script>
   import Navbar from "@/components/Navbar";
-  import  { auth } from "@/firebase";
+  // import BLoading from "buefy/src/components/loading/Loading";
+  import Loader from "@/components/Loader";
 
   export default {
-    email: 'app',
-    components: {
-      Navbar
+    name: 'app',
+    data() {
+      return {
+        loader
+      }
     },
-    created() {
-      console.log('app created');
-      this.$store.dispatch('synchronizeAuth');
+    computed: {
+      authChecked() {
+        return this.$store.state.authChecked;
+      }
+    },
+    components: {
+      Loader,
+      Navbar
     }
   };
 </script>

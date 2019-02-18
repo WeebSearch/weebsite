@@ -3,7 +3,7 @@
     <div class="nav-section">
       <nav class="navbar" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
-          <router-link class="navbar-item" to="/profile">
+          <router-link class="navbar-item" to="/profile" v-if="isLoggedIn">
             <img :src="image"/>
           </router-link>
           <a
