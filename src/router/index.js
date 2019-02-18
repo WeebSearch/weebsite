@@ -3,6 +3,7 @@ import VueRouter from "vue-router";
 import Login from "@/views/Login";
 import Home from "@/views/Home";
 import Animes from "@/views/Animes";
+import { withAuth, withAnonymous } from "@/router/guards";
 
 Vue.use(VueRouter);
 
@@ -10,21 +11,27 @@ const routes = [{
   path: "/",
   redirect: "/home"
 }, {
+  ...withAuth,
   path: "/profile",
-  meta: {
-    requiresAuth: true
-  }
 }, {
-  path: "/login",
-  name: "Login",
-  component: Login
+  ...withAnonymous,
+  path: "/signin",
+  email: "Login",
+  component: Login,
+  props: { mode: "/signin" }
+}, {
+  ...withAnonymous,
+  path: "/register",
+  email: "Register",
+  component: Login,
+  props: { mode: "/register" }
 }, {
   path: "/home",
-  name: "Home",
+  email: "Home",
   component: Home
 }, {
   path: "/animes",
-  name: "Animes",
+  email: "Animes",
   component: Animes
 }];
 

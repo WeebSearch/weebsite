@@ -1,29 +1,32 @@
 <template>
   <div class="media-card box is-radiusless">
     <div class="card-base" v-if="!loaded">
-      <div class="placeholder-image-container">
-        <div class="placeholder-image"></div>
-        <b-loading is-full-page="false"></b-loading>
-        <div class="placeholder-tags">
-          <div class="placeholder-tag"></div>
-          <div class="placeholder-tag"></div>
-          <div class="placeholder-tag"></div>
+      <div class="image-container">
+        <div class="gradient placeholder-image"></div>
+        <div class="tags-container">
+          <div class="gradient placeholder-tag"></div>
+          <div class="gradient placeholder-tag"></div>
+          <div class="gradient placeholder-tag"></div>
         </div>
       </div>
-      <div class="placeholder-text-container">
-        <div class="placeholder-text"></div>
-        <div class="placeholder-text"></div>
+      <div class="text-container">
+        <div class="gradient placeholder-text"></div>
+        <div class="gradient placeholder-text"></div>
       </div>
+    </div>
+    <div class="card-base" v-if="loaded">
+      <div class="image-conatiner">
+
+      </div>
+
     </div>
     <!--<img @load="onLoad" :src="img" alt="">-->
   </div>
 </template>
 
 <script>
-  import BLoading from "buefy/src/components/loading/Loading";
+
   export default {
-    name: "MediaCard",
-    components: { BLoading },
     props: {
       img: String
     },
@@ -33,9 +36,15 @@
     methods: {
       onLoad() {
         this.loaded = true;
+      },
+      simuateLoad() {
       }
+    },
+    mounted() {
+      const TIMEOUT = 1000;
+      setTimeout(() => this.loaded = true, TIMEOUT);
     }
-  }
+  };
 </script>
 
 <style scoped lang="scss">
@@ -52,7 +61,7 @@
     position: relative;
   }
 
-  .placeholder-tags {
+  .tags-container {
     position: absolute;
     margin: 10px;
     height: 50%;
@@ -69,7 +78,7 @@
     background-color: $placeholder-alt;
   }
 
-  .placeholder-text-container {
+  .text-container {
     padding: 1rem;
     display: grid;
     grid-gap: .5rem;
@@ -77,12 +86,13 @@
 
   .placeholder-text {
     background-color: $placeholder;
+
     &:last-child {
       width: 80%;
     }
   }
 
-  .placeholder-image-container {
+  .image-container {
     position: relative;
     width: 100%;
   }
@@ -94,23 +104,73 @@
   }
 
   @-webkit-keyframes gradient-slide {
-    0%{background-position:0% 56%}
-    50%{background-position:100% 45%}
-    100%{background-position:0% 56%}
+    0% {
+      background-position: 0% 56%
+    }
+    50% {
+      background-position: 100% 45%
+    }
+    100% {
+      background-position: 0% 56%
+    }
   }
+
   @-moz-keyframes gradient-slide {
-    0%{background-position:0% 56%}
-    50%{background-position:100% 45%}
-    100%{background-position:0% 56%}
+    0% {
+      background-position: 0% 56%
+    }
+    50% {
+      background-position: 100% 45%
+    }
+    100% {
+      background-position: 0% 56%
+    }
   }
+
   @-o-keyframes gradient-slide {
-    0%{background-position:0% 56%}
-    50%{background-position:100% 45%}
-    100%{background-position:0% 56%}
+    0% {
+      background-position: 0% 56%
+    }
+    50% {
+      background-position: 100% 45%
+    }
+    100% {
+      background-position: 0% 56%
+    }
   }
+
   @keyframes gradient-slide {
-    0%{background-position:0% 56%}
-    50%{background-position:100% 45%}
-    100%{background-position:0% 56%}
+    0% {
+      background-position: 0% 56%
+    }
+    50% {
+      background-position: 100% 45%
+    }
+    100% {
+      background-position: 0% 56%
+    }
+  }
+
+  .gradient {
+    animation-duration: 1.8s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: infinite;
+    animation-name: placeHolderShimmer;
+    animation-timing-function: linear;
+    background: #f6f7f8;
+    background: linear-gradient(to right, #fafafa 8%, #f4f4f4 38%, #fafafa 54%);
+    background-size: 1000px 640px;
+
+    position: relative;
+
+  }
+
+  @keyframes placeHolderShimmer {
+    0% {
+      background-position: -468px 0
+    }
+    100% {
+      background-position: 468px 0
+    }
   }
 </style>

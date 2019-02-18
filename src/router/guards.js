@@ -1,9 +1,34 @@
-export const registerGuards = router => router.beforeEach((to , from, next) => {
-  const authRequired = to.matched.some(record => record.meta.requiresAuth)
+import store from "@/store";
+import { Snackbar } from "buefy/dist/components/snackbar";
 
-  if (authRequired && !store.getters.isLoggedIn) {
-    return next('/login');
+const isLoggedIn = () => Boolean(store.state.user);
+
+export const withAuth = {
+  beforeEnter: (to, from, next) => {
+    if (!isLoggedIn()) {
+      Snackbar.open({
+        message: "You must sign in first.",
+        type: "is-danger",
+        duration: 3000,
+      });
+      return next('/signin');
+    }
+
+    return next();
   }
+};
 
-  return next()
-});
+export const withAnonymous = {
+  beforeEnter: (to, from, next) => {
+    if (isLoggedIn()) {
+      Snackbar.open({
+        message: "You're already signed in.",
+        type: "is-primary",
+        duration: 3000
+      });
+      return next(from.path);
+    }
+
+    return next();
+  }
+};

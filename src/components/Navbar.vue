@@ -3,9 +3,9 @@
     <div class="nav-section">
       <nav class="navbar" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
-          <a class="navbar-item" href="https://bulma.io">
+          <router-link class="navbar-item" to="/profile">
             <img :src="image"/>
-          </a>
+          </router-link>
           <a
             role="button"
             :class="{ 'is-active': menuOpen }"
@@ -28,22 +28,24 @@
             </div>
           </div>
           <div class="navbar-end">
-            <div class="navbar-item">
+            <div class="navbar-item" v-if="!isLoggedIn">
               <div class="buttons">
-                <a href="/"></a>
                 <router-link
-                  to="/login"
+                  to="/signin"
                   class="button is-outlined"
                 >
                   Sign in
                 </router-link>
                 <router-link
-                  to="/signup"
+                  to="/register"
                   class="button is-primary "
                 >
                   Register
                 </router-link>
               </div>
+            </div>
+            <div class="navbar-item" v-if="isLoggedIn">
+              <button to="/" class="button is-outlined" @click="logout">Logout</button>
             </div>
           </div>
         </div>
@@ -54,20 +56,41 @@
 
 <script>
   import image from "@/assets/weebsearch.png";
+  const hiddenPaths = ["/signin", "/register"];
+
+  // const handleLoginVisibility = (state) =>
+
+  const isInLogin = route => hiddenPaths.some(hidden => hidden === route.path);
 
   export default {
-    name: "Navbar",
     data: () => ({
       menuOpen: false,
       links: ["Home", "Animes", "Profile"],
-      image
+      image,
     }),
     methods: {
       toggleMenu() {
         return this.menuOpen = !this.menuOpen;
+      },
+      logout() {
+        console.log('ye');
+        return this.$store.dispatch('logout');
       }
+    },
+    computed: {
+      isLoggedIn() {
+        return Boolean(this.$store.state.user);
+      }
+    },
+    watch: {
+      // $route({ path }) {
+      //   if (isInLogin(path)) {
+      //     return this.loginsVisible = false;
+      //   }
+      //   this.loginsVisible = true;
+      // }
     }
-  }
+  };
 </script>
 
 <style scoped lang="scss">

@@ -5,9 +5,9 @@
 <script>
   import HomePage from "@/components/HomePage";
 	export default {
-		name: "Home",
+		email: "Home",
     components: { HomePage }
-	}
+	};
 </script>
 
 <style scoped>
