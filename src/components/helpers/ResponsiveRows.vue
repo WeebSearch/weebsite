@@ -3,11 +3,13 @@
     <slot></slot>
   </div>
 </template>
+
 <script>
   export default {
     props: ['paddingTop'],
   };
 </script>
+
 <style scoped lang="scss">
   @import "../../variables";
 

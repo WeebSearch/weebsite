@@ -23,7 +23,7 @@ const actions = {
     return applyTimeout(fetchUserStatus, MAX_TIMEOUT).catch(() => false);
   },
   async signIn({ state, commit }, { email, password }) {
-    await auth.setPersistence('session');
+    await auth.setPersistence('local');
     await auth.signInWithEmailAndPassword(email, password);
     commit('setUser');
     return state.user;

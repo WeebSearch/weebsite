@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-    <img :src="loader"/>
+    <img :src="loader" alt="loader">
   </div>
 </template>
 
