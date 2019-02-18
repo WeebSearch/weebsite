@@ -4,8 +4,8 @@
 
 <script>
 	export default {
-		name: "Animes"
-	}
+		email: "Animes"
+	};
 </script>
 
 <style scoped>

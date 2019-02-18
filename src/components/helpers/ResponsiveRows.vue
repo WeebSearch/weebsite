@@ -1,24 +1,21 @@
 <template>
-  <div class="columns">
-    <div class="column section">
-      <slot></slot>
-    </div>
+  <div class="columns" :style="{ 'padding-top': paddingTop }">
+    <slot></slot>
   </div>
 </template>
-
 <script>
-	export default {
-		name: "ResponsiveColumn"
-	}
+  export default {
+    props: ['paddingTop'],
+  };
 </script>
-
 <style scoped lang="scss">
   @import "../../variables";
+
   .columns {
     width: 100%;
     @media(min-width: $tablet) {
-      width: 65%;
+      width: 80%;
+      max-width: 1400px;
     }
   }
-
 </style>

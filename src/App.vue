@@ -9,13 +9,18 @@
 
 <script>
   import Navbar from "@/components/Navbar";
+  import  { auth } from "@/firebase";
 
   export default {
-    name: 'app',
+    email: 'app',
     components: {
       Navbar
+    },
+    created() {
+      console.log('app created');
+      this.$store.dispatch('synchronizeAuth');
     }
-  }
+  };
 </script>
 
 <style lang="scss">
@@ -38,6 +43,7 @@
     justify-content: center;
     padding: 1rem;
   }
+
   body, body {
     min-height: 100vh;
     background-color: $background-color;
@@ -48,10 +54,10 @@
   }
 
   #app {
-    height: 100vh;
     width: 100vw;
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
   }
+
   @import "~bulma/bulma";
   @import "~buefy/src/scss/buefy";
 </style>

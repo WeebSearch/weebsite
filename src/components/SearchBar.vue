@@ -9,11 +9,8 @@
 
 <script>
   import { random } from "@/utils/utils";
-  import BIcon from "buefy/src/components/icon/Icon";
 
   export default {
-    name: "SearchBar",
-    components: { BIcon },
     props: {
       placeholders: Array
     },
@@ -22,7 +19,7 @@
         return `"${random(this.placeholders)}"`;
       }
     }
-  }
+  };
 </script>
 
 <style scoped>

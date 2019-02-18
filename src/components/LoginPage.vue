@@ -1,8 +1,7 @@
 <template>
-  <div class="base">
-    <div class="columns wrapper">
-      <div class="column info is-two-thirds content">
-        <div class="box is-radiusless">
+  <ResponsiveColumns padding-top="6.5">
+    <div class="column info is-two-thirds content">
+      <div class="box is-radiusless">
         <p class="is-size-4">
           Weebsearch is a service for tracking dialogues of anime characters and episodes.
         </p>
@@ -11,21 +10,32 @@
           <li>Look up character statistics</li>
           <li>List your favorite character's dialogues</li>
         </ul>
-          </div>
       </div>
-      <div class="column login is-one-third">
-        <div class="box is-radiusless">
-          <h2 class="login-title is-size-3">Sign in</h2>
+    </div>
+    <div class="column login is-one-third">
+      <div class="box is-radiusless">
+        <div class="tabs is-marginless">
+          <ul>
+            <li @click="mode = `/signin`" :class="{ 'is-active': mode === `/signin` }">
+              <a href="#signin">Sign in</a>
+            </li>
+            <li @click="mode = `/register`" :class="{ 'is-active': mode === `/register` }">
+              <a href="#register">Register</a>
+            </li>
+          </ul>
+        </div>
+        <br>
+        <form id="signin">
           <b-field class="login-label" label="Email">
-            <b-input placeholder="hifumi@eaglejump.com" v-model="name"></b-input>
+            <b-input type="Email" placeholder="hifumi@eaglejump.com" v-model="email"></b-input>
           </b-field>
           <b-field class="login-label" label="Password">
-            <b-input type="password" placeholder="••••••••" v-model="password"></b-input>
+            <b-input minlength="6" type="password" placeholder="••••••••" v-model="password"></b-input>
           </b-field>
           <div class="level is-mobile">
             <div class="level-left">
               <div class="level-item">
-                <b-checkbox v-model="checkbox" size="is-small">Remember me</b-checkbox>
+                <b-checkbox v-model="rememberme" size="is-small">Remember me</b-checkbox>
               </div>
             </div>
             <div class="level-right">
@@ -34,50 +44,91 @@
               </div>
             </div>
           </div>
-          <button class="login-button button is-primary is-fullwidth"
-                  :disabled="!canLogin()">
+          <button
+            type="submit"
+            form="signin"
+            @click="signIn"
+            class="login-button button is-primary is-fullwidth"
+            :disabled="!canLogin()">
             Sign in
           </button>
-        </div>
-        <div class="box is-radiusless">
-          <b-field label="Sign in with">
-            <button class="button is-fullwidth">
-              <b-icon icon-pack="fa" icon="fa-google"></b-icon>
-              Google
-            </button>
-          </b-field>
-        </div>
+        </form>
+      </div>
+      <div class="box is-radiusless">
+        <b-field label="Sign in with">
+          <button class="button is-fullwidth" disabled>
+            <b-icon icon-pack="fa" icon="fa-google"></b-icon>
+            Google
+          </button>
+        </b-field>
       </div>
     </div>
-  </div>
+  </ResponsiveColumns>
 </template>
 
 <script>
-  import wallpaper from "@/assets/weebsearch_login.jpg";
   import BInput from "buefy/src/components/input/Input";
-  import google from "@/assets/google.png";
   import BIcon from "buefy/src/components/icon/Icon";
   import BCheckbox from "buefy/src/components/checkbox/Checkbox";
+  import google from "@/assets/google.png";
+  import ResponsiveColumns from "@/components/helpers/ResponsiveColumns";
+
 
   export default {
-    name: "Login",
-    components: { BCheckbox, BIcon, BInput },
-    data: () => ({
-      name: "",
-      password: "",
-      wallpaper,
-      google
-    }),
+    components: { ResponsiveColumns, BCheckbox, BIcon, BInput },
+    props: {
+      mode: String,
+    },
+    data() {
+      return {
+        email: "",
+        password: "",
+        rememberme: false,
+        google
+      };
+    },
     methods: {
       canLogin() {
-        return this.name && this.password;
+        return this.email && this.password;
+      },
+      handleError(e) {
+        this.$snackbar.open({
+          duration: 3500,
+          message: e,
+          type: "is-danger",
+          actionText: "close"
+        });
+      },
+      signIn(e) {
+        e.preventDefault();
+        const { email, password } = this;
+        const container = document.querySelector('body');
+        const loading = this.$loading.open({ container });
+
+        this.$store.dispatch('signIn', { email, password }).then(() => {
+          loading.close();
+          return this.$router.push('/');
+        }, (e) => {
+          loading.close();
+          return this.handleError(e);
+        }).then();
       }
-    }
-  }
+    },
+  };
 </script>
 
 <style scoped lang="scss">
   @import "../variables.scss";
+
+  .wrapper {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+  }
 
   .login-button {
   }
@@ -94,13 +145,6 @@
   }
 
   .base {
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    width: 100%;
   }
 
   .login-title {

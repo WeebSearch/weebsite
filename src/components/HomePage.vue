@@ -1,12 +1,12 @@
 <template>
-  <ResponsiveColumn>
+  <ResponsiveRows>
     <div class="column">
       <div class="content">
         <h1 class="is-size-1 has-text-centered">Weebsearch</h1>
         <SearchBar :placeholders="placeholders"/>
       </div>
       <div class="previews">
-        <div class="card-container" v-for="image in images">
+        <div class="card-container" :key="image" v-for="image in images">
           <MediaCard
             class="media-card"
             img="https://www.gstatic.com/mobilesdk/160503_mobilesdk/logo/2x/firebase_28dp.png"
@@ -15,26 +15,32 @@
         </div>
       </div>
     </div>
-  </ResponsiveColumn>
+  </ResponsiveRows>
 </template>
 
 <script>
   import BInput from "buefy/src/components/input/Input";
   import MediaCard from "@/components/MediaCard";
   import SearchBar from "@/components/SearchBar";
-  import ResponsiveColumn from "@/components/helpers/ResponsiveColumn";
+  import ResponsiveRows from "@/components/helpers/ResponsiveRows";
 
   import placeholders from "@/data/search-placeholders.json";
 
+  const PLACEHOLDER_COUNT = 15;
 
   export default {
-    name: "HomePage",
-    components: { ResponsiveColumn, SearchBar, MediaCard, BInput },
+    components: { ResponsiveRows, SearchBar, MediaCard },
     data: () => ({
-      images: [1, 2, 34, 2, 3, 2, 42, 4, 24, 1, 4, 1, 4],
-      placeholders
-    })
-  }
+      images: [...Array(PLACEHOLDER_COUNT)],
+      placeholders,
+      loaded: false
+    }),
+    methods: {
+      simulateLoad() {
+        // setTimeout(() => this.loaded = true, 3000);
+      }
+    }
+  };
 </script>
 
 <style scoped>
