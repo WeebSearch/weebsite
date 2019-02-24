@@ -45,11 +45,15 @@ const store = new Vuex.Store({
     },
     checkAuth: state => {
       state.authChecked = true;
-    }
+    },
+    setUserDetails: (state, payload) => state.user = { ...state.user, ...payload }
   },
   actions
 });
 
+/**
+ * Handling auth state change from firebase
+ */
 auth.onAuthStateChanged(user => {
   store.commit('setUser');
   store.commit('checkAuth');

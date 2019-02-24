@@ -37,7 +37,7 @@
                 </router-link>
                 <router-link
                   to="/register"
-                  class="button is-primary "
+                  class="button is-primary"
                 >
                   Register
                 </router-link>

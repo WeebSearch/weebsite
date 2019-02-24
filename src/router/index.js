@@ -4,6 +4,7 @@ import Login from "@/views/Login";
 import Home from "@/views/Home";
 import Animes from "@/views/Animes";
 import { withAuth, withAnonymous } from "@/router/guards";
+import Profile from "@/views/Profile";
 
 Vue.use(VueRouter);
 
@@ -13,6 +14,7 @@ const routes = [{
 }, {
   ...withAuth,
   path: "/profile",
+  component: Profile
 }, {
   ...withAnonymous,
   path: "/signin",
