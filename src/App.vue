@@ -34,8 +34,8 @@
 
 <style lang="scss">
   @import "~bulma/sass/utilities/all";
-  @import "variables";
   @import url('https://fonts.googleapis.com/css?family=Overpass');
+  @import "global";
 
   .cover {
     background-color: $background-color;
@@ -45,6 +45,10 @@
     top: 0;
     left: 0;
     z-index: 100;
+  }
+
+  .wrapper {
+    height: 100%;
   }
 
   .narrow-content {
@@ -61,7 +65,7 @@
     justify-content: center;
   }
 
-  body, body {
+  body, html {
     min-height: 100vh;
     background-color: $background-color;
   }
@@ -72,6 +76,7 @@
 
   #app {
     width: 100vw;
+    height: 100%;
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
   }
 

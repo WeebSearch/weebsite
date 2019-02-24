@@ -3,34 +3,40 @@
     <div class="columns items">
       <div class="column is-one-fifths avatar-container">
         <figure class="image">
-          <img :src="image" alt="" class="is-rounded avatar">
+          <img :src="user.avatar" alt="" class="is-rounded avatar">
         </figure>
       </div>
       <div class="column is-four-fifths">
         <div class="content header-text">
           <div>
-            <p class="name title">{{ name }}</p>
-            <p class="subtitle">@Xetera</p>
+            <p class="name title">{{ user.name }}</p>
+            <p class="name-tag subtitle">@Xetera</p>
           </div>
-          <div class="level is-mobile user-tags">
+          <div class="level user-tags">
             <div class="level-left">
               <div class="level-item">
                 <!--<div class="button is-inverted">Member</div>-->
-                <div class="button tag is-large">Member</div>
+                <div class="tag is-active is-size-6-desktop">Member</div>
               </div>
               <div class="level-item">
-                <div class="tag is-white is-large">Bot</div>
+                <div class="tag is-white is-size-6-desktop">Bot</div>
               </div>
               <div class="level-item">
-                <div class="tag is-large is-info donator">Donator</div>
+                <div class="tag is-size-6-desktop is-info donator">Donator</div>
               </div>
               <div class="level-item">
-                <span class="tag is-danger is-large">Alpha Tester</span>
+                <span class="tag is-danger is-size-6-desktop">Alpha Tester</span>
               </div>
             </div>
             <div class="level-right">
               <div class="level-item">
-                <button class="button follow is-outlined is-primary is-medium">Follow</button>
+                <button
+                  @click="follow"
+                  class="button follow is-outlined is-primary is-size-6-desktop is-size-7-mobile"
+                >
+                  {{ user.following ? "Following" : "Follow" }}
+                </button>
+
               </div>
             </div>
           </div>
@@ -44,11 +50,22 @@
   export default {
     name: "ProfileHeader",
     computed: {
-      name() {
-        return "Xetera";
-      },
-      image() {
-        return "https://cdn.discordapp.com/avatars/140862798832861184/a_aff9dd814944fb8723635d74efd61f18.gif?size=256";
+      user() {
+        return {
+          name: "Xetera",
+          following: false,
+          avatar: "https://cdn.discordapp.com/avatars/140862798832861184/a_aff9dd814944fb8723635d74efd61f18.gif?size=256"
+        };
+      }
+    },
+    methods: {
+      follow() {
+        this.$toast.open({
+          duration: 3000,
+          type: "is-success",
+          position: "is-top",
+          message: `Now following ${this.user.name}`
+        });
       }
     }
   };
@@ -60,19 +77,30 @@
     justify-content: center;
   }
 
+  .name {
+    margin-bottom: .6em !important;
+  }
+
+  .name-tag {
+    color: darkgrey;
+  }
+
   .items {
     width: 65%;
     padding: 1rem 0;
+    height: 80%;
   }
 
   .avatar-container {
     display: flex;
     justify-content: center;
   }
+
   .avatar {
-    max-width: 200px;
-    height: auto;
+    width: auto;
+    max-height: 150px;
   }
+
   .header-text {
     padding: 1rem;
     height: 100%;

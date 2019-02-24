@@ -22,6 +22,7 @@
     width: 100%;
     flex-direction: column;
     padding: 0;
+    height: 100%;
   }
 
   .base {

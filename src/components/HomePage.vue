@@ -9,7 +9,6 @@
           <MediaCard
             class="media-card"
             img="https://www.gstatic.com/mobilesdk/160503_mobilesdk/logo/2x/firebase_28dp.png"
-
           />
         </div>
       </div>
