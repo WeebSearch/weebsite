@@ -20,8 +20,8 @@
         </div>
         <div class="navbar-menu" :class="{ 'is-active': menuOpen }">
           <div class="navbar-start">
-            <div class="navbar-item" :key="link" v-for="link in links">
-              <router-link :key="link" :to=link.toLowerCase()>
+            <div class="navbar-item" :key="link" v-for="link in links" >
+              <router-link :key="link" :to=link.toLowerCase() :class="active === link && activeClass">
                 {{ link }}
               </router-link>
             </div>
@@ -66,8 +66,6 @@
 
   const hiddenPaths = ["/signin", "/register"];
 
-  // const handleLoginVisibility = (state) =>
-
   const isInLogin = route => hiddenPaths.some(hidden => hidden === route.path);
 
   export default {
@@ -76,6 +74,10 @@
       settingsOpen: false,
       links: ["Home", "Animes", "Profile"],
       image,
+      active: "",
+      activeClass: {
+        "color": "#00d1b2"
+      }
     }),
     methods: {
       toggleMenu() {
@@ -92,15 +94,16 @@
     computed: {
       isLoggedIn() {
         return Boolean(this.$store.state.user);
-      }
+      },
     },
     watch: {
-      // $route({ path }) {
-      //   if (isInLogin(path)) {
-      //     return this.loginsVisible = false;
-      //   }
-      //   this.loginsVisible = true;
-      // }
+      $route({ path }) {
+        const active = this.links.find(link => path.toLowerCase().includes(link.toLowerCase()));
+        console.log(active)
+        if (active) {
+          this.active = active;
+        }
+      }
     }
   };
 </script>
@@ -124,6 +127,7 @@
   }
 
   a {
+    font-size: 1.2rem;
     color: $text-color;
 
     &:hover {

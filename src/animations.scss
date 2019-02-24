@@ -1,0 +1,53 @@
+@keyframes rainbow {
+  0% {
+    background: rgba(0,105,255,.71)
+  }
+
+  10% {
+    background: rgba(100,0,255,.71)
+  }
+
+  20% {
+    background: rgba(255,0,139,.71)
+  }
+
+  30% {
+    background: rgba(255,0,0,.71)
+  }
+
+  40% {
+    background: rgba(255,96,0,.71)
+  }
+
+  50% {
+    background: rgba(202,255,0,.71)
+  }
+
+  60% {
+    background: rgba(0,255,139,.71)
+  }
+
+  70% {
+    background: rgba(202,255,0,.71)
+  }
+
+  80% {
+    background: rgba(255,96,0,.71)
+  }
+
+  85% {
+    background: rgba(255,0,0,.71)
+  }
+
+  90% {
+    background: rgba(255,0,139,.71)
+  }
+
+  95% {
+    background: rgba(100,0,255,.71)
+  }
+
+  to {
+    background: rgba(0,105,255,.71)
+  }
+}

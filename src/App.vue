@@ -59,7 +59,6 @@
     height: calc(100% - 52px) !important;
     display: flex;
     justify-content: center;
-    padding: 1rem;
   }
 
   body, body {

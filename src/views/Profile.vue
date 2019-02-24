@@ -1,29 +1,46 @@
 <template>
-  <ResponsiveRows class="wrapper">
-    <div class="columns profile-container is-8">
-      <div class="column is-one-third">
-        <SummarySection/>
-      </div>
-      <div class="column is-two-thirds">
-        <InfoSection/>
-      </div>
+  <div class="columns columns-base">
+    <div class="column base">
+      <Header class="header"/>
+      <Feed class="feed"/>
     </div>
-  </ResponsiveRows>
+  </div>
 </template>
 
 <script>
-  import ResponsiveRows from "@/components/helpers/ResponsiveRows";
-  import SummarySection from "@/components/profile/SummarySection";
-  import InfoSection from "../components/profile/InfoSection";
+  import Header from "../components/profile/ProfileHeader";
+  import Feed from "../components/profile/Feed";
 
   export default {
     name: "Profile",
-    components: { InfoSection, SummarySection, ResponsiveRows }
+    components: { Feed, Header }
   };
 </script>
 
 <style scoped lang="scss">
+  .columns-base {
+    width: 100%;
+    flex-direction: column;
+    padding: 0;
+  }
+
+  .base {
+    width: 100%;
+    flex-direction: column;
+    padding: 0;
+  }
+
+  .header {
+    margin: 1.5rem auto;
+  }
+
+  .feed {
+    margin: 1rem 0;
+  }
+
   .wrapper {
+    width: 100%;
+    flex-direction: column;
     justify-content: center;
   }
 </style>
